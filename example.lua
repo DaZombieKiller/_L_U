@@ -1,11 +1,10 @@
---[[
-	Copyright(C) 2015 Benjamin Moir
-	
-	Distributed under the Boost Software License, Version 1.0.
-	(See accompanying file LICENSE_1_0.txt or http://www.boost.org/LICENSE_1_0.txt)
-	
-	_L_U Lib Example File
---]]
+--
+-- _L_U example file
+--
+-- Copyright(C) 2016 Benjamin Moir
+-- Distributed under the Boost Software License, Version 1.0.
+-- (See accompanying file LICENSE_1_0.txt or http://www.boost.org/LICENSE_1_0.txt)
+--
 
 -- Enable the _L and _U tables
 require "_L_U"
@@ -18,14 +17,9 @@ local local_variable
 _L["local_variable"] = "Hello World"
 print(_L["local_variable"])
 
--- We can also retrieve a table of all local variables
--- by calling the _L table. This can be used to transform
--- all the local variables into global variables.
--- If you wanted to make all local variables globals, then you
+-- If you wanted to make all local variables global, then you
 -- would use this code:
--- for k, v in pairs(_L()) do _G[k] = v end
-local local_vars = _L()
-print(local_vars["local_variable"])
+-- for k, v in pairs(_L) do _G[k] = v end
 
 -- Upvalues are local variables from
 -- outer scopes, that are used in the current function.
@@ -52,13 +46,8 @@ function scope_1()
 		local_variable = local_variable
 		print(_U["local_variable"])
 		
-		-- As with the _L table, we can also call the _U table
-		-- to retrieve a table of available upvalues.
-		local upvalues = _U()
-		print(upvalues["scoped_variable"])
-		
-		-- Thus, upvalues can be transformed into globals too
-		-- for k, v in pairs(_U()) do _G[k] = v end
+		-- upvalues can be transformed into globals too
+		-- for k, v in pairs(_U) do _G[k] = v end
 	end
 	
 	-- Call scope_2
@@ -69,8 +58,6 @@ end
 scope_1()
 
 -- Additional notes/summary
--- * You cannot directly set the _L or _U tables, doing so
---   would prevent them from functioning.
 -- * You cannot use _L to declare a local variable, it must
 --   already be declared using the 'local' keyword.
 -- * You cannot use _U to declare an upvalue, it will automatically

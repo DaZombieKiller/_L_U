@@ -12,14 +12,9 @@ Snippet from example file (explaining the \_L table):
 	_L["local_variable"] = "Hello World"
 	print(_L["local_variable"])
 	
-	-- We can also retrieve a table of all local variables
-	-- by calling the _L table. This can be used to transform
-	-- all the local variables into global variables.
 	-- If you wanted to make all local variables globals, then you
 	-- would use this code:
-	-- for k, v in pairs(_L()) do _G[k] = v end
-	local local_vars = _L()
-	print(local_vars["local_variable"])
+	-- for k, v in pairs(_L) do _G[k] = v end
 
 Upvalues are local variables from outer scopes that are accessed or modified within the current function.
 
@@ -47,13 +42,8 @@ Snippet from example file (explaining the \_U table):
 			local_variable = local_variable
 			print(_U["local_variable"])
 			
-			-- As with the _L table, we can also call the _U table
-			-- to retrieve a table of available upvalues.
-			local upvalues = _U()
-			print(upvalues["scoped_variable"])
-			
-			-- Thus, upvalues can be transformed into globals too
-			-- for k, v in pairs(_U()) do _G[k] = v end
+			-- upvalues can be transformed into globals too
+			-- for k, v in pairs(_U) do _G[k] = v end
 		end
 		
 		-- Call scope_2
